@@ -3,39 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Himeno_Flex.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
+    <Grid>
+        <!-- ここからメインUI -->
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="80"/>
+            <RowDefinition
+                Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid BackgroundColor="LightPink" />
+
+        <StackLayout
+            HorizontalOptions="Center"
             VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                Text="Himeno Flex"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontSize="40"
+                TextColor="white"/>
+        </StackLayout>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+        <Path Grid.RowSpan="2"
+            Fill="LightCyan"
+            Data="M 0,100 L 0,200 L 200,0 L 100,0 Z">
+        </Path>
+        <!-- ここまでメインUI -->
+        
+        <!-- ベンチ結果表示部分 -->
+        <ScrollView Grid.Row="1">
+            <!-- ベンチ結果を表示 -->
+        </ScrollView>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 
 </ContentPage>
