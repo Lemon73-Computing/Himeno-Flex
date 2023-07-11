@@ -17,27 +17,73 @@
 
         <Grid BackgroundColor="LightPink" />
 
-        <StackLayout
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
-            <Label
-                Text="Himeno Flex"
-                HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Center"
-                FontSize="40"
-                TextColor="white"/>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="Himeno Flex"
+                   VerticalTextAlignment="Center"
+                   Margin="180,0,0,0"
+                   FontSize="40"
+                   TextColor="white"/>
         </StackLayout>
-
-        <Path Grid.RowSpan="2"
-            Fill="LightCyan"
-            Data="M 0,100 L 0,200 L 200,0 L 100,0 Z">
-        </Path>
         <!-- ここまでメインUI -->
         
         <!-- ベンチ結果表示部分 -->
-        <ScrollView Grid.Row="1">
-            <!-- ベンチ結果を表示 -->
+        <ScrollView Grid.Row="1"
+                    Margin="60"
+                    Padding="50"
+                    BackgroundColor="AliceBlue">
+            
+            <VerticalStackLayout>
+                <Button Text="ベンチマーク開始"
+                        FontSize="22"
+                        Margin="10,0,10,22"/>
+
+                <HorizontalStackLayout>
+                    <Label Text="MFLOPS: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="時間(秒): "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="ループ回数: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Label Text="誤差: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="MFLOPS 測定: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="CPU: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Pentium3 600MHz基準: "
+                           FontSize="22"/>
+                    <Label Text=""/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
         </ScrollView>
+
+        <!-- ここからメインUI -->
+        <Path Grid.RowSpan="2"
+              Fill="LightCyan"
+              Data="M -100,200 L -100,280 L 280,-100 L 200,-100 Z"
+              IsEnabled="False" />
+        <!-- IsEnabled…マウスクリック無効(有効だと上記のScrollViewでスクロールができないから) -->
+        <!-- ここまでメインUI -->
 
     </Grid>
 
