@@ -15,13 +15,13 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid BackgroundColor="LightPink" />
+        <Grid BackgroundColor="{AppThemeBinding Light=LightPink, Dark={StaticResource Primary}}" />
 
         <StackLayout VerticalOptions="Center">
             <Label Text="Himeno Flex"
                    VerticalTextAlignment="Center"
                    Margin="180,0,0,0"
-                   FontSize="40"
+                   FontSize="36"
                    TextColor="white"/>
         </StackLayout>
         <!-- # ここまで メインUI # -->
@@ -30,7 +30,7 @@
         <ScrollView Grid.Row="1"
                     Margin="60"
                     Padding="50"
-                    BackgroundColor="AliceBlue">
+                    BackgroundColor="{AppThemeBinding Light=AliceBlue, Dark=#121212}">
             
             <VerticalStackLayout>
                 <Button Text="ベンチマーク開始"
@@ -94,7 +94,7 @@
 
         <!-- # ここから メインUI # -->
         <Path Grid.RowSpan="2"
-              Fill="LightCyan"
+              Fill="{AppThemeBinding Light=LightCyan, Dark=AliceBlue}"
               Data="M -100,200 L -100,280 L 280,-100 L 200,-100 Z"
               IsEnabled="False" />
         <!-- IsEnabled…マウスクリック無効(有効だと上記のScrollViewでスクロールができないから) -->
