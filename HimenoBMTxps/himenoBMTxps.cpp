@@ -38,6 +38,8 @@
 
 #include <stdio.h>
 
+#include "header.h"
+
 #ifdef SSMALL
 #define MIMAX            33
 #define MJMAX            33
@@ -50,11 +52,12 @@
 #define MKMAX            129
 #endif
 
-#ifdef MIDDLE
+//middleを使用。(後ほどss/s/m/l/elで選択できるようにするかも)
+//#ifdef MIDDLE
 #define MIMAX            129
 #define MJMAX            129
 #define MKMAX            257
-#endif
+//#endif
 
 #ifdef LARGE
 #define MIMAX            257
@@ -85,8 +88,7 @@ wrk2[MIMAX][MJMAX][MKMAX];
 static int imax, jmax, kmax;
 static float omega;
 
-int
-main()
+int main()
 {
     int    i, j, k, nn;
     float  gosa;
@@ -138,14 +140,12 @@ main()
     printf(" Loop executed for %d times\n", nn);
     printf(" Gosa : %e \n", gosa);
     printf(" MFLOPS measured : %f\tcpu : %f\n", mflops(nn, cpu, flop), cpu);
-    printf(" Score based on Pentium III 600MHz : %f\n",
-        mflops(nn, cpu, flop) / 82, 84);
+    printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82, 84);
 
     return (0);
 }
 
-void
-initmt()
+void initmt()
 {
     int i, j, k;
 
@@ -186,8 +186,7 @@ initmt()
             }
 }
 
-float
-jacobi(int nn)
+float jacobi(int nn)
 {
     int i, j, k, n;
     float gosa, s0, ss;
@@ -230,40 +229,32 @@ jacobi(int nn)
     return(gosa);
 }
 
-double
-fflop(int mx, int my, int mz)
+double fflop(int mx, int my, int mz)
 {
     return((double)(mz - 2) * (double)(my - 2) * (double)(mx - 2) * 34.0);
 }
 
-double
-mflops(int nn, double cpu, double flop)
+double mflops(int nn, double cpu, double flop)
 {
     return(flop / cpu * 1.e-6 * (double)nn);
 }
 
-double
-second()
+//時間計算書き換え(sys/time.hが利用できないため)
+#include <time.h>
+
+double second()
 {
-#include <sys/time.h>
+    clock_t t;
+    static clock_t base = 0;
+    t = clock();
 
-    struct timeval tm;
-    double t;
-
-    static int base_sec = 0, base_usec = 0;
-
-    gettimeofday(&tm, NULL);
-
-    if (base_sec == 0 && base_usec == 0)
+    if (base == 0)
     {
-        base_sec = tm.tv_sec;
-        base_usec = tm.tv_usec;
-        t = 0.0;
+        base = t;
+        return 0.0;
     }
-    else {
-        t = (double)(tm.tv_sec - base_sec) +
-            ((double)(tm.tv_usec - base_usec)) / 1.0e6;
+    else
+    {
+        return (double)(t - base) / CLOCKS_PER_SEC;
     }
-
-    return t;
 }
