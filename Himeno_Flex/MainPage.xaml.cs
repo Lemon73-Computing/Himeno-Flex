@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Storage;
+using Microsoft.Maui.ApplicationModel;
+using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +14,18 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    //姫野ベンチマーク(C言語)読み取り
+    [DllImport("himenoBMTxps.dll")]
+    static extern int main();
+    [DllImport("himenoBMTxps.dll")]
+    static extern float jacobi(int nn);
+    [DllImport("himenoBMTxps.dll")]
+    static extern double fflop(int mx, int my, int mz);
+    [DllImport("himenoBMTxps.dll")]
+    static extern double mflops(int nn, double cpu, double flop);
+    [DllImport("himenoBMTxps.dll")]
+    static extern double second();
 
     private void Button_Clicked(object sender, EventArgs e)
     {
@@ -24,14 +39,12 @@ public partial class MainPage : ContentPage
         pentium.Text = "";
 
         //ベンチマーク開始
-
+        //Cからデータを入力
         /*
-        [DllImport("himenoBMTxps.dll")]
-        static extern int main();
-        static extern float jacobi(int nn);
-        static extern double fflop(int mx, int my, int mz);
-        static extern double mflops(int nn, double cpu, double flop);
-        static double second();
+        static void C_Main(string[] args)
+        {
+            main(); //C言語のmain関数を実行する 
+        }
         */
 
         //終了
@@ -45,12 +58,11 @@ public partial class MainPage : ContentPage
 
     }
 
-
     private async void Button_Clicked_1(object sender, EventArgs e)
     {
         await SaveFile(CancellationToken.None);
 
-        // ファイル保存
+        // ファイル保存(.html)
         async Task SaveFile(CancellationToken cancellationToken)
         {
             using var writer = new MemoryStream();
@@ -92,6 +104,32 @@ public partial class MainPage : ContentPage
                 await Toast.Make($"The file was not saved successfully with error: {fileSaverResult.Exception.Message}").Show(cancellationToken);
             }
             */
+        }
+    }
+
+    private async void Button_Clicked_2(object sender, EventArgs e)
+    {
+        await SaveFile(CancellationToken.None);
+
+        // ファイル保存(.txt)
+        async Task SaveFile(CancellationToken cancellationToken)
+        {
+            using var writer = new MemoryStream();
+
+            writer.Write(Encoding.UTF8.GetBytes("Himeno Flex ベンチマーク結果\r\n"));///\r\nは改行コード
+            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(仮): {mflops1.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(実測): {mflops2.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"時間: {time.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"実行ループ回数: {loop.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"CPU: {cpu.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"Pentium3 600MHzと比較: {pentium.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+
+            var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.txt", writer, cancellationToken);
         }
     }
 }
