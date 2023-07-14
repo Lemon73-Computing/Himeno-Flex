@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Storage;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Himeno_Flex;
 
@@ -42,37 +45,53 @@ public partial class MainPage : ContentPage
 
     }
 
-    private void Button_Clicked_1(object sender, EventArgs e)
+
+    private async void Button_Clicked_1(object sender, EventArgs e)
     {
-        //HTMLで結果を出力(現時点ではWindowsでCドライブ直下に配置。他のOSではエラーになるかも?)
-        string outFilePath = $@"c:\{DateTimeOffset.Now:yyyyMMddHHmmss}_result.html";
+        await SaveFile(CancellationToken.None);
 
-        using (var writer = new StreamWriter(outFilePath, false))
+        // ファイル保存
+        async Task SaveFile(CancellationToken cancellationToken)
         {
-            writer.WriteLine("<html>");
-            writer.WriteLine("<head>");
-            writer.WriteLine("<title>Himeno Flex 結果</title>");
-            writer.WriteLine("<link rel=\"icon\" href=\"https://lemon73.gitlab.io/favicon.png\">");
-            writer.WriteLine("<meta charset=\"utf-8\">");
-            writer.WriteLine("<link rel=\"stylesheet\" href=\"https://lemon73.gitlab.io/style.css\">");
-            writer.WriteLine("</head>");
+            using var writer = new MemoryStream();
 
-            writer.WriteLine("<body>");
-            writer.WriteLine("<header><b><p style=\"padding-left: 8%;\"><a href=\"https://i.riken.jp/supercom/documents/himenobmt/\">Himeno Flex</a></p></b></header>");
-            writer.WriteLine("<main>");
-            writer.WriteLine("<h1>Himeno Flex ベンチマーク結果</h1>");
-            writer.WriteLine($@"<p>MFLOPS: {mflops1.Text}</p>");
-            writer.WriteLine($@"<p>時間: {time.Text}</p>");
-            writer.WriteLine($@"<p>実行ループ回数: {loop.Text}</p>");
-            writer.WriteLine($@"<p>MFLOPS: {mflops2.Text}</p>");
-            writer.WriteLine($@"<p>CPU: {cpu.Text}</p>");
-            writer.WriteLine($@"<p>Pentium3 600MHzと比較: {pentium.Text}</p>");
-            writer.WriteLine("<br />");
-            writer.WriteLine($@"<p>記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}</p>");
-            writer.WriteLine("</main>");
-            writer.WriteLine("</body>");
-            writer.WriteLine("</html>");
-            writer.WriteLine("");
+            writer.Write(Encoding.UTF8.GetBytes("<html>"));
+            writer.Write(Encoding.UTF8.GetBytes("<head>"));
+            writer.Write(Encoding.UTF8.GetBytes("<title>Himeno Flex ベンチマーク結果</title>"));
+            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"icon\" href=\"https://lemon73.gitlab.io/favicon.png\">"));
+            writer.Write(Encoding.UTF8.GetBytes("<meta charset=\"utf-8\">"));
+            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"stylesheet\" href=\"https://lemon73.gitlab.io/style.css\">"));
+            writer.Write(Encoding.UTF8.GetBytes("</head>"));
+
+            writer.Write(Encoding.UTF8.GetBytes("<body>"));
+            writer.Write(Encoding.UTF8.GetBytes("<header><b><p style=\"padding-left: 8%;\">Himeno Flex</p></b></header>"));
+            writer.Write(Encoding.UTF8.GetBytes("<main>"));
+            writer.Write(Encoding.UTF8.GetBytes("<h1>Himeno Flex ベンチマーク結果</h1>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(仮): {mflops1.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(実測): {mflops2.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>時間: {time.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>実行ループ回数: {loop.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>CPU: {cpu.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>Pentium3 600MHzと比較: {pentium.Text}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes("<br />"));
+            writer.Write(Encoding.UTF8.GetBytes("<br />"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}</p>"));
+            writer.Write(Encoding.UTF8.GetBytes("</main>"));
+            writer.Write(Encoding.UTF8.GetBytes("</body>"));
+            writer.Write(Encoding.UTF8.GetBytes("</html>"));
+            writer.Write(Encoding.UTF8.GetBytes(""));
+
+            var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.html", writer, cancellationToken);
+            /* ファイル保存通知(成功orエラー+原因)
+            if (fileSaverResult.IsSuccessful)
+            {
+                await Toast.Make($"The file was saved successfully to location: {fileSaverResult.FilePath}").Show(cancellationToken);
+            }
+            else
+            {
+                await Toast.Make($"The file was not saved successfully with error: {fileSaverResult.Exception.Message}").Show(cancellationToken);
+            }
+            */
         }
     }
 }
