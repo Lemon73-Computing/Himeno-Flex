@@ -39,13 +39,22 @@
                         Clicked="Button_Clicked"/>
 
                 <HorizontalStackLayout>
-                    <Label Text="MFLOPS:"
+                    <Label Text="MFLOPS(仮):"
                            FontSize="22"
                            Margin="0,0,11,0"/>
                     <Label Text=""
                            x:Name="mflops1"
                            FontSize="22"/>
                 </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="MFLOPS(実測):"
+                           FontSize="22"
+                           Margin="0,0,11,0"/>
+                    <Label Text=""
+                           x:Name="mflops2"
+                           FontSize="22"/>
+                </HorizontalStackLayout>
+                
                 <HorizontalStackLayout>
                     <Label Text="時間(秒):"
                            FontSize="22"
@@ -69,14 +78,6 @@
                            Margin="0,0,11,0"/>
                     <Label Text=""
                            x:Name="gosa"
-                           FontSize="22"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label Text="MFLOPS:"
-                           FontSize="22"
-                           Margin="0,0,11,0"/>
-                    <Label Text=""
-                           x:Name="mflops2"
                            FontSize="22"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
