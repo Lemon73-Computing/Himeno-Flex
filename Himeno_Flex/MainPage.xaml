@@ -30,7 +30,7 @@
         <ScrollView Grid.Row="1"
                     Margin="30"
                     Padding="30"
-                    BackgroundColor="{AppThemeBinding Light=AliceBlue, Dark=#121212}">
+                    BackgroundColor="{AppThemeBinding Light=AliceBlue, Dark=#202020}">
             
             <VerticalStackLayout>
                 <Button Text="ベンチマーク開始"
@@ -97,17 +97,31 @@
                            FontSize="22"/>
                 </HorizontalStackLayout>
 
-                <Button Text="出力"
+                <!-- HorizontalStackLayoutを使うとボタンが引き延ばされないのでGridで分割している -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Text="txt出力"
                         FontSize="22"
-                        Margin="10,22,10,0"
-                        Clicked="Button_Clicked_1"/>
+                        Margin="10,22,5,0"
+                        Clicked="Button_Clicked_2"
+                        Grid.Column="0"/>
+                    <Button Text="html出力"
+                        FontSize="22"
+                        Margin="5,22,10,0"
+                        Clicked="Button_Clicked_1"
+                        Grid.Column="1"/>
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
         <!-- # ここまで ベンチ結果表示部分 # -->
 
         <!-- # ここから メインUI # -->
         <Path Grid.RowSpan="2"
-              Fill="{AppThemeBinding Light=LightCyan, Dark=AliceBlue}"
+              Fill="{AppThemeBinding Light=LightCyan, Dark={StaticResource Secondary}}"
               Data="M -100,200 L -100,280 L 280,-100 L 200,-100 Z"
               IsEnabled="False" />
         <!-- IsEnabled…マウスクリック無効(有効だと上記のScrollViewでスクロールができないから) -->
