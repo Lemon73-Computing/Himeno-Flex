@@ -67,31 +67,32 @@ public partial class MainPage : ContentPage
         {
             using var writer = new MemoryStream();
 
-            writer.Write(Encoding.UTF8.GetBytes("<html>"));
-            writer.Write(Encoding.UTF8.GetBytes("<head>"));
-            writer.Write(Encoding.UTF8.GetBytes("<title>Himeno Flex ベンチマーク結果</title>"));
-            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"icon\" href=\"https://lemon73.gitlab.io/favicon.png\">"));
-            writer.Write(Encoding.UTF8.GetBytes("<meta charset=\"utf-8\">"));
-            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"stylesheet\" href=\"https://lemon73.gitlab.io/style.css\">"));
-            writer.Write(Encoding.UTF8.GetBytes("</head>"));
+            writer.Write(Encoding.UTF8.GetBytes("<html>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<head>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<title>Himeno Flex ベンチマーク結果</title>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"icon\" href=\"https://lemon73.gitlab.io/favicon.png\">\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<meta charset=\"utf-8\">\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<meta name=\"viewport\" content=\"width=640\">\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<link rel=\"stylesheet\" href=\"https://lemon73.gitlab.io/style.css\">\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("</head>\r\n"));
 
-            writer.Write(Encoding.UTF8.GetBytes("<body>"));
-            writer.Write(Encoding.UTF8.GetBytes("<header><b><p style=\"padding-left: 8%;\">Himeno Flex</p></b></header>"));
-            writer.Write(Encoding.UTF8.GetBytes("<main>"));
-            writer.Write(Encoding.UTF8.GetBytes("<h1>Himeno Flex ベンチマーク結果</h1>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(仮): {mflops1.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(実測): {mflops2.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>時間: {time.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>実行ループ回数: {loop.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>CPU: {cpu.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>Pentium3 600MHzと比較: {pentium.Text}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes("<br />"));
-            writer.Write(Encoding.UTF8.GetBytes("<br />"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}</p>"));
-            writer.Write(Encoding.UTF8.GetBytes("</main>"));
-            writer.Write(Encoding.UTF8.GetBytes("</body>"));
-            writer.Write(Encoding.UTF8.GetBytes("</html>"));
-            writer.Write(Encoding.UTF8.GetBytes(""));
+            writer.Write(Encoding.UTF8.GetBytes("<body>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<header><b><p style=\"padding-left: 8%;\">Himeno Flex</p></b></header>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<main>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<h1>Himeno Flex ベンチマーク結果</h1>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(仮): {mflops1.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(実測): {mflops2.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>時間: {time.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>実行ループ回数: {loop.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>CPU: {cpu.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>Pentium3 600MHzと比較: {pentium.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<br />\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("<br />\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("</main>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("</body>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("</html>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
 
             var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.html", writer, cancellationToken);
             /* ファイル保存通知(成功orエラー+原因)
@@ -116,7 +117,7 @@ public partial class MainPage : ContentPage
         {
             using var writer = new MemoryStream();
 
-            writer.Write(Encoding.UTF8.GetBytes("Himeno Flex ベンチマーク結果\r\n"));///\r\nは改行コード
+            writer.Write(Encoding.UTF8.GetBytes("Himeno Flex ベンチマーク結果\r\n"));//\r\nは改行コード
             writer.Write(Encoding.UTF8.GetBytes("\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(仮): {mflops1.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(実測): {mflops2.Text}"+"\r\n"));
