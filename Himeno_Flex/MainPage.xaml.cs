@@ -92,7 +92,7 @@ public partial class MainPage : ContentPage
             writer.Write(Encoding.UTF8.GetBytes("</main>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("</body>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("</html>\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Seek(0, SeekOrigin.Begin);//Androidに出力するときに、保存したファイル内に何も書き込まれない現象の対策
 
             var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.html", writer, cancellationToken);
             /* ファイル保存通知(成功orエラー+原因)
@@ -128,7 +128,7 @@ public partial class MainPage : ContentPage
             writer.Write(Encoding.UTF8.GetBytes("\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"記録日時: {DateTimeOffset.Now:yyyy/MM/dd/HH:mm:ss}"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Seek(0, SeekOrigin.Begin);//Androidに出力するときに、保存したファイル内に何も書き込まれない現象の対策
 
             var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.txt", writer, cancellationToken);
         }
