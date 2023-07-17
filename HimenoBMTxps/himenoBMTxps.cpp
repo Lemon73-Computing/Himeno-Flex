@@ -40,6 +40,7 @@
 
 #include "header.h"
 
+/*
 #ifdef SSMALL
 #define MIMAX            33
 #define MJMAX            33
@@ -51,6 +52,7 @@
 #define MJMAX            65
 #define MKMAX            129
 #endif
+*/
 
 //middleを使用。(後ほどss/s/m/l/elで選択できるようにするかも)
 //#ifdef MIDDLE
@@ -59,6 +61,7 @@
 #define MKMAX            257
 //#endif
 
+/*
 #ifdef LARGE
 #define MIMAX            257
 #define MJMAX            257
@@ -70,9 +73,10 @@
 #define MJMAX            513
 #define MKMAX            1025
 #endif
+*/
 
 double second();
-float jacobi();
+float jacobi(int);
 void initmt();
 double fflop(int, int, int);
 double mflops(int, double, double);
@@ -90,7 +94,7 @@ static float omega;
 
 int main()
 {
-    int    i, j, k, nn;
+    int    i = 0, j = 0, k = 0, nn;
     float  gosa;
     double cpu, cpu0, cpu1, flop, target;
 
@@ -140,7 +144,7 @@ int main()
     printf(" Loop executed for %d times\n", nn);
     printf(" Gosa : %e \n", gosa);
     printf(" MFLOPS measured : %f\tcpu : %f\n", mflops(nn, cpu, flop), cpu);
-    printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82, 84);
+    printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82/*, 84*/);
 
     return (0);
 }
@@ -189,7 +193,7 @@ void initmt()
 float jacobi(int nn)
 {
     int i, j, k, n;
-    float gosa, s0, ss;
+    float gosa{}, s0, ss;
 
     for (n = 0; n < nn; ++n) {
         gosa = 0.0;
@@ -239,9 +243,8 @@ double mflops(int nn, double cpu, double flop)
     return(flop / cpu * 1.e-6 * (double)nn);
 }
 
-//時間計算書き換え(sys/time.hが利用できないため)
-#include <time.h>
-
+#include <time.h>//(sys/time.hが利用できないため)
+//時間計算書き換え
 double second()
 {
     clock_t t;
