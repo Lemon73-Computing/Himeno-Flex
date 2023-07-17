@@ -1,13 +1,11 @@
 #pragma once
 
-#define DllExport   __declspec( dllexport )
-
 extern "C"
 {
-    DllExport int main();
-    DllExport void initmt();
-    DllExport float jacobi(int nn);
-    DllExport double fflop(int mx, int my, int mz);
-    DllExport double mflops(int nn, double cpu, double flop);
-    DllExport double second();
+    __declspec(dllexport) int main();
+    __declspec(dllexport) void initmt();
+    __declspec(dllexport) float jacobi(int nn);
+    __declspec(dllexport) double fflop(int mx, int my, int mz);
+    __declspec(dllexport) double mflops(int nn, double cpu, double flop);
+    __declspec(dllexport) double second();
 }
