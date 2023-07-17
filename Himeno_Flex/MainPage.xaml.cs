@@ -16,15 +16,15 @@ public partial class MainPage : ContentPage
 	}
 
     //姫野ベンチマーク(C言語)読み取り
-    [DllImport("himenoBMTxps.dll")]
+    [DllImport("HimenoBMTxps.dll")]
     static extern int main();
-    [DllImport("himenoBMTxps.dll")]
+    [DllImport("HimenoBMTxps.dll")]
     static extern float jacobi(int nn);
-    [DllImport("himenoBMTxps.dll")]
+    [DllImport("HimenoBMTxps.dll")]
     static extern double fflop(int mx, int my, int mz);
-    [DllImport("himenoBMTxps.dll")]
+    [DllImport("HimenoBMTxps.dll")]
     static extern double mflops(int nn, double cpu, double flop);
-    [DllImport("himenoBMTxps.dll")]
+    [DllImport("HimenoBMTxps.dll")]
     static extern double second();
 
     private void Button_Clicked(object sender, EventArgs e)
@@ -38,10 +38,25 @@ public partial class MainPage : ContentPage
         cpu.Text = "";
         pentium.Text = "";
 
+        //dll存在判定(temp)
+        string dllPath = "HimenoBMTxps.dll";
+        if (File.Exists(dllPath))
+        {
         //ベンチマーク開始
-        //Cからデータを入力
-        /*
-        static void C_Main(string[] args)
+            try
+            {
+                main();//C言語のmain関数を実行する
+                mflops1.Text = "clear";
+            }
+            catch
+            {
+                mflops1.Text = "error";
+            }
+        }
+        else
+        {
+            mflops1.Text = "no dll";
+        }
         {
             main(); //C言語のmain関数を実行する 
         }
