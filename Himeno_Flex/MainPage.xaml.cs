@@ -47,15 +47,16 @@ public partial class MainPage : ContentPage
             {
                 main();//C言語のmain関数を実行する
                 mflops1.Text = "clear";
+                mflops1.Text = "main_clear";
             }
             catch
             {
-                mflops1.Text = "error";
+                mflops1.Text = "main_error";
             }
         }
         else
         {
-            mflops1.Text = "no dll";
+            mflops1.Text = "main_no dll";
         }
         {
             main(); //C言語のmain関数を実行する 
@@ -63,7 +64,7 @@ public partial class MainPage : ContentPage
         */
 
         //終了
-        mflops1.Text = "test";
+        //mflops1.Text = "test";
         mflops2.Text = "test";
         time.Text = "test";
         loop.Text = "test";
