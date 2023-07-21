@@ -56,9 +56,9 @@
 
 //middleを使用。(後ほどss/s/m/l/elで選択できるようにするかも)
 //#ifdef MIDDLE
-#define MIMAX            129
-#define MJMAX            129
-#define MKMAX            257
+#define MIMAX 129
+#define MJMAX 129
+#define MKMAX 257
 //#endif
 
 /*
@@ -74,7 +74,7 @@
 #define MKMAX            1025
 #endif
 */
-
+    
 double second();
 float jacobi(int);
 void initmt();
@@ -105,8 +105,8 @@ int main()
     kmax = MKMAX - 1;
 
     /*
-     *    Initializing matrixes
-     */
+        *    Initializing matrixes
+        */
     initmt();
     printf("mimax = %d mjmax = %d mkmax = %d\n", MIMAX, MJMAX, MKMAX);
     printf("imax = %d jmax = %d kmax =%d\n", imax, jmax, kmax);
@@ -133,8 +133,8 @@ int main()
     printf(" Wait for a while\n\n");
 
     /*
-     *    Start measuring
-     */
+        *    Start measuring
+        */
     cpu0 = second();
     gosa = jacobi(nn);
     cpu1 = second();
