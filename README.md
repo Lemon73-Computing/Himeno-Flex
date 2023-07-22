@@ -3,7 +3,7 @@
 ## 概要
 こちらのソフトウェアは、[理化学研究所](https://www.riken.jp)/[情報システム部](https://i.riken.jp)
 で発表されている[姫野ベンチマーク](https://i.riken.jp/supercom/documents/himenobmt/)をGUIにしたソフトウェアです。<br />
-(内蔵している姫野ベンチマークはC言語/計算サイズ:```m```です。)<br />
+(内蔵している姫野ベンチマークは"C言語/計算サイズ:```m```"です。)<br />
 理論上はWindows/MacOS/Android/iOSで使えます。<br />
 (が、現在の予定ではWindowsのみ配布する予定です。ほかのMacOSなどで使いたい場合はこちらのレポジトリから自分でビルドしてください。)<br />
 
