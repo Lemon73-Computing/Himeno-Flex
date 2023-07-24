@@ -68,7 +68,7 @@
        width="1024"
        height="128"
        x="0"
-       y="calc(512 - 128)"
+       y="384"
        clip-path="url(#clipPath2424)" />
     <rect
        style="fill:#aaeeff;stroke-width:0.519034;fill-opacity:1"
