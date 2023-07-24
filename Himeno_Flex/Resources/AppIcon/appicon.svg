@@ -68,15 +68,15 @@
        width="1024"
        height="128"
        x="0"
-       y="192"
+       y="calc(512 - 128)"
        clip-path="url(#clipPath2424)" />
     <rect
        style="fill:#aaeeff;stroke-width:0.519034;fill-opacity:1"
        id="rect1668"
        width="2048"
        height="128"
-       x="-512"
-       y="350"
+       x="-1024"
+       y="512"
        transform="rotate(-40)"
        clip-path="url(#clipPath2420)" />
   </g>
