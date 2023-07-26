@@ -26,6 +26,11 @@ public partial class MainPage : ContentPage
     static extern double mflops(int nn, double cpu, double flop);
     [DllImport("HimenoBMTxps.dll")]
     static extern double second();
+    //
+    //
+    [DllImport("test.dll")]
+    static extern void Test();
+    //
 
     private void Button_Clicked(object sender, EventArgs e)
     {
@@ -42,11 +47,18 @@ public partial class MainPage : ContentPage
         string dllPath = "HimenoBMTxps.dll";
         if (File.Exists(dllPath))
         {
-        //ベンチマーク開始
+            //ベンチマーク開始
             try
             {
                 main();//C言語のmain関数を実行する
-                mflops1.Text = "clear";
+                /* Cのprintfの出力を受け取る
+                string output = Console.ReadLine();
+                while (!string.IsNullOrEmpty(output))
+                {
+                    Console.WriteLine(output);
+                    output = Console.ReadLine();
+                }
+                */
                 mflops1.Text = "main_clear";
             }
             catch
@@ -58,20 +70,27 @@ public partial class MainPage : ContentPage
         {
             mflops1.Text = "main_no dll";
         }
+        //
+        //テスト(temp)
+        try
         {
-            main(); //C言語のmain関数を実行する 
+            Test();//C言語のTest関数を実行する
+            mflops2.Text = "test_clear";
         }
-        */
+        catch
+        {
+            mflops2.Text = "test_error";
+        }
+        //
 
         //終了
         //mflops1.Text = "test";
-        mflops2.Text = "test";
+        //mflops2.Text = "test";
         time.Text = "test";
         loop.Text = "test";
         gosa.Text = "test";
         cpu.Text = "test";
         pentium.Text = "test";
-
     }
 
     private async void Button_Clicked_1(object sender, EventArgs e)
@@ -82,7 +101,7 @@ public partial class MainPage : ContentPage
         async Task SaveFile(CancellationToken cancellationToken)
         {
             using var writer = new MemoryStream();
-
+            
             writer.Write(Encoding.UTF8.GetBytes("<html>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("<head>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("<title>Himeno Flex ベンチマーク結果</title>\r\n"));
