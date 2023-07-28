@@ -30,6 +30,8 @@ public partial class MainPage : ContentPage
     //
     [DllImport("test.dll")]
     static extern void Test();
+    [DllImport("test.dll")]
+    static extern int Add(int a, int b);
     //
 
     private void Button_Clicked(object sender, EventArgs e)
@@ -71,15 +73,16 @@ public partial class MainPage : ContentPage
             mflops1.Text = "main_no dll";
         }
         //
+
         //テスト(temp)
         try
         {
-            Test();//C言語のTest関数を実行する
-            mflops2.Text = "test_clear";
+            int r = Add(2, 3);
+            mflops2.Text = "Add Clear, " + r;
         }
         catch
         {
-            mflops2.Text = "test_error";
+            mflops2.Text = "Add Error";
         }
         //
 
