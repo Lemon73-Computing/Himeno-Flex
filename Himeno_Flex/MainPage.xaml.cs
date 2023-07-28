@@ -37,13 +37,13 @@ public partial class MainPage : ContentPage
     private void Button_Clicked(object sender, EventArgs e)
     {
 		//ベンチマーク前にデータを削除(初期化)
-		mflops1.Text = "";
-		mflops2.Text = "";
-		time.Text = "";
-        loop.Text = "";
-		gosa.Text = "";
-        cpu.Text = "";
-        pentium.Text = "";
+		mflops1.Text = "測定中";
+		mflops2.Text = "測定中";
+		time.Text = "測定中";
+        loop.Text = "測定中";
+		gosa.Text = "測定中";
+        cpu.Text = "測定中";
+        pentium.Text = "測定中";
 
         //dll存在判定(temp)
         string dllPath = "HimenoBMTxps.dll";
@@ -61,16 +61,16 @@ public partial class MainPage : ContentPage
                     output = Console.ReadLine();
                 }
                 */
-                mflops1.Text = "main_clear";
+                mflops1.Text = "Main Clear";
             }
             catch
             {
-                mflops1.Text = "main_error";
+                mflops1.Text = "Main Error";
             }
         }
         else
         {
-            mflops1.Text = "main_no dll";
+            mflops1.Text = "Main No DLL";
         }
         //
 
@@ -87,13 +87,13 @@ public partial class MainPage : ContentPage
         //
 
         //終了
-        //mflops1.Text = "test";
-        //mflops2.Text = "test";
-        time.Text = "test";
-        loop.Text = "test";
-        gosa.Text = "test";
-        cpu.Text = "test";
-        pentium.Text = "test";
+        //mflops1.Text = "Test";
+        //mflops2.Text = "Test";
+        time.Text = "Test";
+        loop.Text = "Test";
+        gosa.Text = "Test";
+        cpu.Text = "Test";
+        pentium.Text = "Test";
     }
 
     private async void Button_Clicked_1(object sender, EventArgs e)
