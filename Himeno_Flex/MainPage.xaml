@@ -33,10 +33,35 @@
                     BackgroundColor="{AppThemeBinding Light=AliceBlue, Dark=#202020}">
             
             <VerticalStackLayout>
+                <Picker x:Name="size"
+                        SelectedIndexChanged="size_SelectedIndexChanged"
+                        Title="規模を選択してください。"
+                        FontSize="20"
+                        Margin="10, 10, 10, 0">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>SSmall</x:String>
+                            <x:String>Small</x:String>
+                            <x:String>Middle</x:String>
+                            <x:String>Large</x:String>
+                            <x:String>ELarge</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                
                 <Button Text="ベンチマーク開始"
                         FontSize="22"
-                        Margin="10,0,10,22"
+                        Margin="10,22,10,22"
                         Clicked="Button_Clicked"/>
+
+                <HorizontalStackLayout>
+                    <Label Text="規模:"
+                           FontSize="22"
+                           Margin="0,0,11,0"/>
+                    <Label Text=""
+                           x:Name="ram"
+                           FontSize="22"/>
+                </HorizontalStackLayout>
 
                 <HorizontalStackLayout>
                     <Label Text="MFLOPS(仮):"
