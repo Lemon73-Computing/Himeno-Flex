@@ -36,6 +36,41 @@ public partial class MainPage : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
+        if (size.SelectedIndex == -1)
+        {
+            //未選択時
+            ram.Text = "規模が選択されていません。";
+        }
+        else
+        {
+            //「規模」欄に反映
+            switch (size.SelectedIndex)
+            {
+                case 0:
+                    ram.Text = "SSmall";
+                    break;
+
+                case 1:
+                    ram.Text = "Small";
+                    break;
+
+                case 2:
+                    ram.Text = "Middle";
+                    break;
+
+                case 3:
+                    ram.Text = "Large";
+                    break;
+
+                case 4:
+                    ram.Text = "ELarge";
+                    break;
+
+                default:
+                    ram.Text = "error";
+                    break;
+            }
+
 		//ベンチマーク前にデータを削除(初期化)
 		mflops1.Text = "測定中";
 		mflops2.Text = "測定中";
@@ -46,13 +81,58 @@ public partial class MainPage : ContentPage
         pentium.Text = "測定中";
 
         //dll存在判定(temp)
+            /*
         string dllPath = "HimenoBMTxps.dll";
         if (File.Exists(dllPath))
         {
+            */
             //ベンチマーク開始
             try
             {
-                main();//C言語のmain関数を実行する
+                    int MIMAX;
+                    int MJMAX;
+                    int MKMAX;
+
+                    switch (ram.Text)
+                    {
+                        case "SSmall":
+                            MIMAX = 33;
+                            MJMAX = 33;
+                            MKMAX = 65;
+                            break;
+
+                        case "Small":
+                            MIMAX = 65;
+                            MJMAX = 65;
+                            MKMAX = 129;
+                            break;
+
+                        case "Middle":
+                            MIMAX = 129;
+                            MJMAX = 129;
+                            MKMAX = 257;
+                            break;
+
+                        case "Large":
+                            MIMAX = 257;
+                            MJMAX = 257;
+                            MKMAX = 513;
+                            break;
+
+                        case "ELarge":
+                            MIMAX = 513;
+                            MJMAX = 513;
+                            MKMAX = 1025;
+                            break;
+
+                        //null対策
+                        default:
+                            MIMAX = 0;
+                            MJMAX = 0;
+                            MKMAX = 0;
+                            break;
+                    }
+
                 /* Cのprintfの出力を受け取る
                 string output = Console.ReadLine();
                 while (!string.IsNullOrEmpty(output))
@@ -61,18 +141,20 @@ public partial class MainPage : ContentPage
                     output = Console.ReadLine();
                 }
                 */
-                mflops1.Text = "Main Clear";
+                    mflops1.Text = "Main Clear, " + MIMAX + ", " + MJMAX + ", " + MKMAX;
             }
             catch
             {
                 mflops1.Text = "Main Error";
             }
+            /*
         }
         else
         {
             mflops1.Text = "Main No DLL";
         }
         //
+            */
 
         //テスト(temp)
         try
@@ -94,6 +176,7 @@ public partial class MainPage : ContentPage
         gosa.Text = "Test";
         cpu.Text = "Test";
         pentium.Text = "Test";
+    }
     }
 
     private async void Button_Clicked_1(object sender, EventArgs e)
@@ -118,6 +201,7 @@ public partial class MainPage : ContentPage
             writer.Write(Encoding.UTF8.GetBytes("<header><b><p style=\"padding-left: 8%;\">Himeno Flex</p></b></header>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("<main>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("<h1>Himeno Flex ベンチマーク結果</h1>\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>規模: {ram.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(仮): {mflops1.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(実測): {mflops2.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>時間: {time.Text}</p>"+"\r\n"));
@@ -157,6 +241,7 @@ public partial class MainPage : ContentPage
 
             writer.Write(Encoding.UTF8.GetBytes("Himeno Flex ベンチマーク結果\r\n"));//\r\nは改行コード
             writer.Write(Encoding.UTF8.GetBytes("\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"規模: {ram.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(仮): {mflops1.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(実測): {mflops2.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"時間: {time.Text}"+"\r\n"));
@@ -170,5 +255,10 @@ public partial class MainPage : ContentPage
 
             var fileSaverResult = await FileSaver.Default.SaveAsync($@"HimemoFlex_{DateTimeOffset.Now:yyyyMMdd_HHmmss}.txt", writer, cancellationToken);
         }
+    }
+
+    private void size_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }
