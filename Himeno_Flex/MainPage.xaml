@@ -51,7 +51,7 @@
                 
                 <Button Text="ベンチマーク開始"
                         FontSize="22"
-                        Margin="10,22,10,22"
+                        Margin="10,12,10,12"
                         Clicked="Button_Clicked"/>
 
                 <HorizontalStackLayout>
@@ -131,12 +131,12 @@
 
                     <Button Text="txt出力"
                         FontSize="22"
-                        Margin="10,22,5,0"
+                        Margin="10,12,5,0"
                         Clicked="Button_Clicked_2"
                         Grid.Column="0"/>
                     <Button Text="html出力"
                         FontSize="22"
-                        Margin="5,22,10,0"
+                        Margin="5,12,10,0"
                         Clicked="Button_Clicked_1"
                         Grid.Column="1"/>
                 </Grid>
