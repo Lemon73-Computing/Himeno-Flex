@@ -15,7 +15,7 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-    //姫野ベンチマーク(C言語)読み取り
+    /*姫野ベンチマーク(C言語)読み取り
     [DllImport("HimenoBMTxps.dll")]
     static extern int main();
     [DllImport("HimenoBMTxps.dll")]
@@ -26,7 +26,7 @@ public partial class MainPage : ContentPage
     static extern double mflops(int nn, double cpu, double flop);
     [DllImport("HimenoBMTxps.dll")]
     static extern double second();
-    //
+    */
     //
     [DllImport("test.dll")]
     static extern void Test();
@@ -71,67 +71,85 @@ public partial class MainPage : ContentPage
                     break;
             }
 
-		//ベンチマーク前にデータを削除(初期化)
-		mflops1.Text = "測定中";
-		mflops2.Text = "測定中";
-		time.Text = "測定中";
-        loop.Text = "測定中";
-		gosa.Text = "測定中";
-        cpu.Text = "測定中";
-        pentium.Text = "測定中";
+            //ベンチマーク前にデータを削除(初期化)
+            mflops1.Text = "測定中";
+            mflops2.Text = "測定中";
+            time.Text = "測定中";
+            loop.Text = "測定中";
+            gosa.Text = "測定中";
+            cpu.Text = "測定中";
+            pentium.Text = "測定中";
 
-        //dll存在判定(temp)
-            /*
-        string dllPath = "HimenoBMTxps.dll";
-        if (File.Exists(dllPath))
-        {
-            */
             //ベンチマーク開始
             try
             {
-                    int MIMAX;
-                    int MJMAX;
-                    int MKMAX;
+                int MIMAX;
+                int MJMAX;
+                int MKMAX;
 
-                    switch (ram.Text)
-                    {
-                        case "SSmall":
-                            MIMAX = 33;
-                            MJMAX = 33;
-                            MKMAX = 65;
-                            break;
+                switch (ram.Text)
+                {
+                    case "SSmall":
+                        MIMAX = 33;
+                        MJMAX = 33;
+                        MKMAX = 65;
+                        break;
 
-                        case "Small":
-                            MIMAX = 65;
-                            MJMAX = 65;
-                            MKMAX = 129;
-                            break;
+                    case "Small":
+                        MIMAX = 65;
+                        MJMAX = 65;
+                        MKMAX = 129;
+                        break;
 
-                        case "Middle":
-                            MIMAX = 129;
-                            MJMAX = 129;
-                            MKMAX = 257;
-                            break;
+                    case "Middle":
+                        MIMAX = 129;
+                        MJMAX = 129;
+                        MKMAX = 257;
+                        break;
 
-                        case "Large":
-                            MIMAX = 257;
-                            MJMAX = 257;
-                            MKMAX = 513;
-                            break;
+                    case "Large":
+                        MIMAX = 257;
+                        MJMAX = 257;
+                        MKMAX = 513;
+                        break;
 
-                        case "ELarge":
-                            MIMAX = 513;
-                            MJMAX = 513;
-                            MKMAX = 1025;
-                            break;
+                    case "ELarge":
+                        MIMAX = 513;
+                        MJMAX = 513;
+                        MKMAX = 1025;
+                        break;
 
-                        //null対策
-                        default:
-                            MIMAX = 0;
-                            MJMAX = 0;
-                            MKMAX = 0;
-                            break;
-                    }
+                    //null対策
+                    default:
+                        MIMAX = 0;
+                        MJMAX = 0;
+                        MKMAX = 0;
+                        break;
+                }
+
+                [DllImport("HimenoBMTxps.dll")]
+                static extern int main();
+                [DllImport("HimenoBMTxps.dll")]
+                static extern float jacobi(int nn);
+                [DllImport("HimenoBMTxps.dll")]
+                static extern double fflop(int mx, int my, int mz);
+                [DllImport("HimenoBMTxps.dll")]
+                static extern double mflops(int nn, double cpu, double flop);
+                [DllImport("HimenoBMTxps.dll")]
+                static extern double second();
+
+                float[,,] p = new float[MIMAX, MJMAX, MKMAX];
+                float[,,,] a = new float[4, MIMAX, MJMAX, MKMAX];
+                float[,,,] b = new float[3, MIMAX, MJMAX, MKMAX];
+                float[,,,] c = new float[3, MIMAX, MJMAX, MKMAX];
+                float[,,] bnd = new float[MIMAX, MJMAX, MKMAX];
+                float[,,] wrk1 = new float[MIMAX, MJMAX, MKMAX];
+                float[,,] wrk2 = new float[MIMAX, MJMAX, MKMAX];
+
+                int imax, jmax, kmax;
+                float omega;
+
+                main();//C言語のmain関数を実行する
 
                 /* Cのprintfの出力を受け取る
                 string output = Console.ReadLine();
@@ -141,42 +159,35 @@ public partial class MainPage : ContentPage
                     output = Console.ReadLine();
                 }
                 */
-                    mflops1.Text = "Main Clear, " + MIMAX + ", " + MJMAX + ", " + MKMAX;
+                mflops1.Text = "Clear";
             }
             catch
             {
-                mflops1.Text = "Main Error";
+                mflops1.Text = "Error";
             }
-            /*
-        }
-        else
-        {
-            mflops1.Text = "Main No DLL";
-        }
-        //
+
+            //テスト(temp)
+            try
+            {
+                int r = Add(2, 3);
+                mflops2.Text = "Add Clear, " + r;
+            }
+            catch
+            {
+                mflops2.Text = "Add Error";
+            }
+            //
+
+            /*終了
+            mflops1.Text = "Test";
+            mflops2.Text = "Test";
+            time.Text = "Test";
+            loop.Text = "Test";
+            gosa.Text = "Test";
+            cpu.Text = "Test";
+            pentium.Text = "Test";
             */
-
-        //テスト(temp)
-        try
-        {
-            int r = Add(2, 3);
-            mflops2.Text = "Add Clear, " + r;
         }
-        catch
-        {
-            mflops2.Text = "Add Error";
-        }
-        //
-
-        //終了
-        //mflops1.Text = "Test";
-        //mflops2.Text = "Test";
-        time.Text = "Test";
-        loop.Text = "Test";
-        gosa.Text = "Test";
-        cpu.Text = "Test";
-        pentium.Text = "Test";
-    }
     }
 
     private async void Button_Clicked_1(object sender, EventArgs e)
