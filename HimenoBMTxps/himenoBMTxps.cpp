@@ -91,7 +91,7 @@ wrk2[MIMAX][MJMAX][MKMAX];
 static int imax, jmax, kmax;
 static float omega;
 
-int main()
+int main(double* out1, double* out2, int* out3, float* out4, double* out5, double* out6, double* out7)
 {
     int    i = 0, j = 0, k = 0, nn;
     float  gosa;
@@ -124,12 +124,17 @@ int main()
     //printf(" MFLOPS: %f time(s): %f %e\n\n",
     //    mflops(nn, cpu, flop), cpu, gosa);
 
+    *out1 = mflops(nn, cpu, flop);
+    *out2 = cpu;
+
     nn = (int)(target / (cpu / 3.0));
 
     //printf(" Now, start the actual measurement process.\n");
     //printf(" The loop will be excuted in %d times\n", nn);
     //printf(" This will take about one minute.\n");
     //printf(" Wait for a while\n\n");
+
+    *out3 = nn;
 
     /*
      *  Start measuring
@@ -145,7 +150,12 @@ int main()
     //printf(" MFLOPS measured : %f\tcpu : %f\n", mflops(nn, cpu, flop), cpu);
     //printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82/*, 84*/);
 
-    return (0);
+    *out4 = gosa;
+    *out5 = mflops(nn, cpu, flop);
+    *out6 = cpu;
+    *out7 = mflops(nn, cpu, flop) / 82;
+
+    return 0;
 }
 
 void initmt()
