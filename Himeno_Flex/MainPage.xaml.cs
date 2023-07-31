@@ -37,8 +37,6 @@ public partial class MainPage : ContentPage
 
             //ベンチマーク前にデータを削除(初期化)
             mflops1.Text = "測定中";
-            mflops2.Text = "測定中";
-            time.Text = "測定中";
             loop.Text = "測定中";
             gosa.Text = "測定中";
             cpu.Text = "測定中";
@@ -93,14 +91,6 @@ public partial class MainPage : ContentPage
 
                 [DllImport("HimenoBMTxps.dll")]
                 static extern int main(out double out1, out double out2, out int out3, out float out4, out double out5, out double out6, out double out7);
-                [DllImport("HimenoBMTxps.dll")]
-                static extern float jacobi(int nn);
-                [DllImport("HimenoBMTxps.dll")]
-                static extern double fflop(int mx, int my, int mz);
-                [DllImport("HimenoBMTxps.dll")]
-                static extern double mflops(int nn, double cpu, double flop);
-                [DllImport("HimenoBMTxps.dll")]
-                static extern double second();
 
                 float[,,] p = new float[MIMAX, MJMAX, MKMAX];
                 float[,,,] a = new float[4, MIMAX, MJMAX, MKMAX];
@@ -109,9 +99,10 @@ public partial class MainPage : ContentPage
                 float[,,] bnd = new float[MIMAX, MJMAX, MKMAX];
                 float[,,] wrk1 = new float[MIMAX, MJMAX, MKMAX];
                 float[,,] wrk2 = new float[MIMAX, MJMAX, MKMAX];
-
+                /*
                 int imax, jmax, kmax;
                 float omega;
+                */
 
                 //ボタンクリックを無効化し、main関数が同時に複数回読み取れないようにする
                 Bench_Button.IsEnabled = false;
@@ -123,9 +114,7 @@ public partial class MainPage : ContentPage
 
                 await Task.Run(() => main(out out_1, out out_2, out out_3, out out_4, out out_5, out out_6, out out_7));//C言語のmain関数を実行する(非同期処理)
 
-                mflops1.Text = out_1.ToString();//後で削除(仮計算と実計算が同時に出るなら仮計算の意味がない)
-                mflops2.Text = out_5.ToString();
-                time.Text = out_3.ToString();//後で削除(回数を時間だと間違えてた)
+                mflops1.Text = out_5.ToString();
                 loop.Text = out_3.ToString();
                 gosa.Text = out_4.ToString();
                 cpu.Text = out_6.ToString();
@@ -164,9 +153,7 @@ public partial class MainPage : ContentPage
             writer.Write(Encoding.UTF8.GetBytes("<main>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes("<h1>Himeno Flex ベンチマーク結果</h1>\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>規模: {ram.Text}</p>"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(仮): {mflops1.Text}</p>"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS(実測): {mflops2.Text}</p>"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"<p>時間: {time.Text}</p>"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"<p>MFLOPS: {mflops1.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>実行ループ回数: {loop.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>CPU: {cpu.Text}</p>"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"<p>Pentium3 600MHzと比較: {pentium.Text}</p>"+"\r\n"));
@@ -204,9 +191,7 @@ public partial class MainPage : ContentPage
             writer.Write(Encoding.UTF8.GetBytes("Himeno Flex ベンチマーク結果\r\n"));//\r\nは改行コード
             writer.Write(Encoding.UTF8.GetBytes("\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"規模: {ram.Text}"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(仮): {mflops1.Text}"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS(実測): {mflops2.Text}"+"\r\n"));
-            writer.Write(Encoding.UTF8.GetBytes($@"時間: {time.Text}"+"\r\n"));
+            writer.Write(Encoding.UTF8.GetBytes($@"MFLOPS: {mflops1.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"実行ループ回数: {loop.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"CPU: {cpu.Text}"+"\r\n"));
             writer.Write(Encoding.UTF8.GetBytes($@"Pentium3 600MHzと比較: {pentium.Text}"+"\r\n"));
