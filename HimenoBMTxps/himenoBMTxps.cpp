@@ -107,12 +107,12 @@ int main()
      *  Initializing matrixes
      */
     initmt();
-    printf("mimax = %d mjmax = %d mkmax = %d\n", MIMAX, MJMAX, MKMAX);
-    printf("imax = %d jmax = %d kmax =%d\n", imax, jmax, kmax);
+    //printf("mimax = %d mjmax = %d mkmax = %d\n", MIMAX, MJMAX, MKMAX);
+    //printf("imax = %d jmax = %d kmax =%d\n", imax, jmax, kmax);
 
     nn = 3;
-    printf(" Start rehearsal measurement process.\n");
-    printf(" Measure the performance in %d times.\n\n", nn);
+    //printf(" Start rehearsal measurement process.\n");
+    //printf(" Measure the performance in %d times.\n\n", nn);
 
     cpu0 = second();
     gosa = jacobi(nn);
@@ -121,15 +121,15 @@ int main()
 
     flop = fflop(imax, jmax, kmax);
 
-    printf(" MFLOPS: %f time(s): %f %e\n\n",
-        mflops(nn, cpu, flop), cpu, gosa);
+    //printf(" MFLOPS: %f time(s): %f %e\n\n",
+    //    mflops(nn, cpu, flop), cpu, gosa);
 
     nn = (int)(target / (cpu / 3.0));
 
-    printf(" Now, start the actual measurement process.\n");
-    printf(" The loop will be excuted in %d times\n", nn);
-    printf(" This will take about one minute.\n");
-    printf(" Wait for a while\n\n");
+    //printf(" Now, start the actual measurement process.\n");
+    //printf(" The loop will be excuted in %d times\n", nn);
+    //printf(" This will take about one minute.\n");
+    //printf(" Wait for a while\n\n");
 
     /*
      *  Start measuring
@@ -140,10 +140,10 @@ int main()
 
     cpu = cpu1 - cpu0;
 
-    printf(" Loop executed for %d times\n", nn);
-    printf(" Gosa : %e \n", gosa);
-    printf(" MFLOPS measured : %f\tcpu : %f\n", mflops(nn, cpu, flop), cpu);
-    printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82/*, 84*/);
+    //printf(" Loop executed for %d times\n", nn);
+    //printf(" Gosa : %e \n", gosa);
+    //printf(" MFLOPS measured : %f\tcpu : %f\n", mflops(nn, cpu, flop), cpu);
+    //printf(" Score based on Pentium III 600MHz : %f\n", mflops(nn, cpu, flop) / 82/*, 84*/);
 
     return (0);
 }
