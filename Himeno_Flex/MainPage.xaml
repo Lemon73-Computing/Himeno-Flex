@@ -34,7 +34,7 @@
             
             <VerticalStackLayout>
                 <Picker x:Name="size"
-                        SelectedIndexChanged="size_SelectedIndexChanged"
+                        SelectedIndexChanged="Size_SelectedIndexChanged"
                         Title="規模を選択してください。"
                         FontSize="20"
                         Margin="10, 10, 10, 0">
@@ -52,7 +52,8 @@
                 <Button Text="ベンチマーク開始"
                         FontSize="22"
                         Margin="10,12,10,12"
-                        Clicked="Button_Clicked"/>
+                        Clicked="Button_Clicked"
+                        x:Name="Bench_Button"/>
 
                 <HorizontalStackLayout>
                     <Label Text="規模:"
