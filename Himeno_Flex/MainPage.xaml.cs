@@ -15,26 +15,7 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-    /*姫野ベンチマーク(C言語)読み取り
-    [DllImport("HimenoBMTxps.dll")]
-    static extern int main();
-    [DllImport("HimenoBMTxps.dll")]
-    static extern float jacobi(int nn);
-    [DllImport("HimenoBMTxps.dll")]
-    static extern double fflop(int mx, int my, int mz);
-    [DllImport("HimenoBMTxps.dll")]
-    static extern double mflops(int nn, double cpu, double flop);
-    [DllImport("HimenoBMTxps.dll")]
-    static extern double second();
-    */
-    //
-    [DllImport("test.dll")]
-    static extern void Test();
-    [DllImport("test.dll")]
-    static extern int Add(int a, int b);
-    //
-
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
         if (size.SelectedIndex == -1)
         {
@@ -44,32 +25,15 @@ public partial class MainPage : ContentPage
         else
         {
             //「規模」欄に反映
-            switch (size.SelectedIndex)
+            ram.Text = size.SelectedIndex switch
             {
-                case 0:
-                    ram.Text = "SSmall";
-                    break;
-
-                case 1:
-                    ram.Text = "Small";
-                    break;
-
-                case 2:
-                    ram.Text = "Middle";
-                    break;
-
-                case 3:
-                    ram.Text = "Large";
-                    break;
-
-                case 4:
-                    ram.Text = "ELarge";
-                    break;
-
-                default:
-                    ram.Text = "error";
-                    break;
-            }
+                0 => "SSmall",
+                1 => "Small",
+                2 => "Middle",
+                3 => "Large",
+                4 => "ELarge",
+                _ => "Size Error",
+            };
 
             //ベンチマーク前にデータを削除(初期化)
             mflops1.Text = "測定中";
@@ -149,44 +113,19 @@ public partial class MainPage : ContentPage
                 int imax, jmax, kmax;
                 float omega;
 
-                main();//C言語のmain関数を実行する
+                //ボタンクリックを無効化し、main関数が同時に複数回読み取れないようにする
+                Bench_Button.IsEnabled = false;
+                Bench_Button.Text = "ベンチマーク中";
 
-                /* Cのprintfの出力を受け取る
-                string output = Console.ReadLine();
-                while (!string.IsNullOrEmpty(output))
-                {
-                    Console.WriteLine(output);
-                    output = Console.ReadLine();
-                }
-                */
-                mflops1.Text = "Clear";
+                await Task.Run(() => main());//C言語のmain関数を実行する(非同期処理)
+
+                Bench_Button.IsEnabled = true;
+                Bench_Button.Text = "ベンチマーク開始";
             }
             catch
             {
-                mflops1.Text = "Error";
+                ram.Text = "DLL Error";
             }
-
-            //テスト(temp)
-            try
-            {
-                int r = Add(2, 3);
-                mflops2.Text = "Add Clear, " + r;
-            }
-            catch
-            {
-                mflops2.Text = "Add Error";
-            }
-            //
-
-            /*終了
-            mflops1.Text = "Test";
-            mflops2.Text = "Test";
-            time.Text = "Test";
-            loop.Text = "Test";
-            gosa.Text = "Test";
-            cpu.Text = "Test";
-            pentium.Text = "Test";
-            */
         }
     }
 
@@ -268,7 +207,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void size_SelectedIndexChanged(object sender, EventArgs e)
+    private void Size_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
