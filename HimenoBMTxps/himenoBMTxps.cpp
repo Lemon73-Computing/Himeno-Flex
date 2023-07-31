@@ -37,31 +37,30 @@
 ********************************************************************/
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "header.h"
 
-/*
-#ifdef SSMALL
+//C#側で数値を決定する(コンパイルエラーの対策のために便宜上SSmallを指定)
+//#ifdef SSMALL
 #define MIMAX            33
 #define MJMAX            33
 #define MKMAX            65
-#endif
+//#endif
+/*
 
 #ifdef SMALL
 #define MIMAX            65
 #define MJMAX            65
 #define MKMAX            129
 #endif
-*/
 
-//middleを使用。(後ほどss/s/m/l/elで選択できるようにするかも)
-//#ifdef MIDDLE
+#ifdef MIDDLE
 #define MIMAX 129
 #define MJMAX 129
 #define MKMAX 257
-//#endif
+#endif
 
-/*
 #ifdef LARGE
 #define MIMAX            257
 #define MJMAX            257
@@ -105,8 +104,8 @@ int main()
     kmax = MKMAX - 1;
 
     /*
-        *    Initializing matrixes
-        */
+     *  Initializing matrixes
+     */
     initmt();
     printf("mimax = %d mjmax = %d mkmax = %d\n", MIMAX, MJMAX, MKMAX);
     printf("imax = %d jmax = %d kmax =%d\n", imax, jmax, kmax);
@@ -133,8 +132,8 @@ int main()
     printf(" Wait for a while\n\n");
 
     /*
-        *    Start measuring
-        */
+     *  Start measuring
+     */
     cpu0 = second();
     gosa = jacobi(nn);
     cpu1 = second();
