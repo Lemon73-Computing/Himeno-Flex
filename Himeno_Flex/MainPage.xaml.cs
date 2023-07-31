@@ -92,7 +92,7 @@ public partial class MainPage : ContentPage
                 }
 
                 [DllImport("HimenoBMTxps.dll")]
-                static extern int main();
+                static extern int main(out double out1, out double out2, out int out3, out float out4, out double out5, out double out6, out double out7);
                 [DllImport("HimenoBMTxps.dll")]
                 static extern float jacobi(int nn);
                 [DllImport("HimenoBMTxps.dll")]
@@ -117,7 +117,19 @@ public partial class MainPage : ContentPage
                 Bench_Button.IsEnabled = false;
                 Bench_Button.Text = "ベンチマーク中";
 
-                await Task.Run(() => main());//C言語のmain関数を実行する(非同期処理)
+                double out_1 = 0, out_2 = 0, out_5 = 0, out_6 = 0, out_7 = 0;
+                int out_3 = 0;
+                float out_4 = 0;
+
+                await Task.Run(() => main(out out_1, out out_2, out out_3, out out_4, out out_5, out out_6, out out_7));//C言語のmain関数を実行する(非同期処理)
+
+                mflops1.Text = out_1.ToString();//後で削除(仮計算と実計算が同時に出るなら仮計算の意味がない)
+                mflops2.Text = out_5.ToString();
+                time.Text = out_3.ToString();//後で削除(回数を時間だと間違えてた)
+                loop.Text = out_3.ToString();
+                gosa.Text = out_4.ToString();
+                cpu.Text = out_6.ToString();
+                pentium.Text = out_7.ToString();
 
                 Bench_Button.IsEnabled = true;
                 Bench_Button.Text = "ベンチマーク開始";
