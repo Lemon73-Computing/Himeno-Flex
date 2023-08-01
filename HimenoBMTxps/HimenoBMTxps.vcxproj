@@ -122,6 +122,14 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>copy "..\$(PlatformTarget)\$(Configuration)\*" "..\Himeno_Flex\bin\$(Configuration)\$(TargetFramework)-windows10.0.19041.0\win10-$(PlatformTarget)\"
+copy "..\$(PlatformTarget)\$(Configuration)\*" "..\Himeno_Flex\bin\$(Configuration)\$(TargetFramework)-windows10.0.19041.0\win10-$(PlatformTarget)\AppX\"
+copy "..\$(PlatformTarget)\$(Configuration)\*" "..\Himeno_Flex\bin\$(Configuration)\$(TargetFramework)-maccatalyst\maccatalyst-$(PlatformTarget)\"
+copy "..\$(PlatformTarget)\$(Configuration)\*" "..\Himeno_Flex\bin\$(Configuration)\$(TargetFramework)-android\"
+copy "..\$(PlatformTarget)\$(Configuration)\*" "..\Himeno_Flex/bin\$(Configuration)\$(TargetFramework)-ios\iossimulator-$(PlatformTarget)\"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
