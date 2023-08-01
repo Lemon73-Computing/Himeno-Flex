@@ -37,7 +37,7 @@
                         SelectedIndexChanged="Size_SelectedIndexChanged"
                         Title="規模を選択してください。"
                         FontSize="20"
-                        Margin="10, 10, 10, 0">
+                        Margin="20, 0, 20, 0">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>SSmall</x:String>
@@ -136,9 +136,7 @@
               Fill="{AppThemeBinding Light=LightCyan, Dark={StaticResource Secondary}}"
               Data="M -100,200 L -100,280 L 280,-100 L 200,-100 Z"
               IsEnabled="False" />
-        <!-- IsEnabled…マウスクリック無効(有効だと上記のScrollViewでスクロールができないから) -->
         <!-- # ここまで メインUI # -->
-
     </Grid>
 
 </ContentPage>
