@@ -126,6 +126,10 @@ public partial class MainPage : ContentPage
             catch
             {
                 ram.Text = "DLL Error";
+
+                //初期状態に戻す
+                Bench_Button.IsEnabled = true;
+                Bench_Button.Text = "ベンチマーク開始";
             }
         }
     }
