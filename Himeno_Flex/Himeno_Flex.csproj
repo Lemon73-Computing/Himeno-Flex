@@ -29,8 +29,8 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.18362.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Authors>$(AssemblyName), Lemon Electric Computer</Authors>
-		<Copyright>LGPL v2.1</Copyright>
-		<Description>Himeno Bench Mark for GUI.</Description>
+		<Copyright>LGPL v2.0 or later</Copyright>
+		<Description>GUI Application for Bench Mark</Description>
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<NeutralLanguage>ja-JP</NeutralLanguage>
