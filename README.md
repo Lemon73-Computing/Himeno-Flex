@@ -3,9 +3,6 @@
 ## 概要
 こちらのソフトウェアは、[理化学研究所](https://www.riken.jp)/[情報システム部](https://i.riken.jp)
 より発表されている[姫野ベンチマーク](https://i.riken.jp/supercom/documents/himenobmt/)をGUIにしたソフトウェアです。<br />
-理論上はWindows/MacOS/Android/iOSで使えます。<br />
-(現在の予定ではWindowsのみ配布する予定です。<br />
-Windows以外のAndroidなどで使いたい場合はこちらのレポジトリから自分でビルドしてください。)<br />
 
 ## 開発状況
 完成
@@ -15,7 +12,6 @@ Windows以外のAndroidなどで使いたい場合はこちらのレポジトリ
 
 未完成
 - 姫野ベンチマーク読み込み部分(Windows以外)
-現在Android版の動作に向けて誠意開発中です。
 
 ## 技術
 プログラム言語
@@ -46,7 +42,8 @@ Windows以外のAndroidなどで使いたい場合はこちらのレポジトリ
 
 - 対応OS
 従来: 公式ではWindows/MacOS向けと、C言語のLinuxやUnixなどで使えるコードが配布されています。<br />
-今回: こちらでは、Windows/MacOS/Android/iOSに対応しています。(Linux/Unixでは動作しません。)<br />
+今回: こちらでは、Windows ~~/MacOS/Android/iOS~~ に対応しています。(Linux/Unixでは動作しません。)<br />
+(※当初の予定ではWindows/MacOS/Android/iOSに対応予定でしたが、Androidは技術不足で開発困難、MacOS/iOSは実機テストが不可能なために開発を断念しました。)
 
 - コード
 従来のコードとほとんど違いはありませんが、時間計測方法など一部変更している点も存在します。<br />
@@ -65,3 +62,4 @@ MAUIはLinuxでも使えるという噂がありますが、実際に使える�
 #### Linux/Solaris向けについて
 当初の予定では、Linux/Solaris用としてJavaFX版Himeno_Flexを開発する予定でした。<br />
 しかし、こちら(MAUI版)の開発に予想以上の時間がかかっているため、JavaFX版を作る可能性は低いです。<br />
+
