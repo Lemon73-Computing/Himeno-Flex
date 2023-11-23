@@ -3,7 +3,7 @@
 ## 概要
 こちらのソフトウェアは、[理化学研究所](https://www.riken.jp)/[情報システム部](https://i.riken.jp)
 より発表されている[姫野ベンチマーク](https://i.riken.jp/supercom/documents/himenobmt/)をGUIにしたソフトウェアです。<br />
-併せて[こちら(サイト版)](https://lemon73.gitlab.io/neo/soft_himeno)もご覧ください。
+併せて[解説ページ](https://lemon73.gitlab.io/apps/himeno)もご覧ください。
 
 ## 開発状況
 進捗: **開発停止**
@@ -30,7 +30,7 @@
 
 ## ライセンス
 [LGPLv2.1](LICENSE.txt)です。<br />
-(姫野ベンチマークのライセンスの影響によって)<br />
+(姫野ベンチマークのライセンスを継承)<br />
 
 ## 従来の姫野ベンチマークとの比較
 - UI
