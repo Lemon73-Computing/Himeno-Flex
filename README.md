@@ -79,6 +79,10 @@
 
 (C言語で書かれたものを本家C++やC++/CLIにしたらベンチマーク速度の比較はできないのではないかとも今更思いましたが、そこら辺はどうなのでしょうか…)
 
+**参考になりそうなリンク**<br />
+- https://learn.microsoft.com/en-us/xamarin/cross-platform/cpp/<br />
+Xamarin時代のC++の使い方。ただし、Xamarin時代とMAUIではディレクトリの構成が異なっており、あまり参考にならなかった気がします…
+
 ## 開発する
 #### Windows/MacOSの場合
 VisualStudioで.slnファイルを開けば利用できるかと思います。<br />
