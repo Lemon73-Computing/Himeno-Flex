@@ -74,10 +74,10 @@
 Xamarin時代のC++の使い方。ただし、Xamarin時代とMAUIではディレクトリの構成が異なっており、あまり参考にならなかった気がします…
 
 ## 開発する
-#### Windows/MacOSの場合
+#### Windows
 VisualStudioで.slnファイルを開けば利用できるかと思います。<br />
 
-#### Linuxの場合
+#### MacOS/Linux
 Android向けのビルドのみ可能だそうです。<br />
 ツールはVS Codeを推奨します。(MicrosoftのMAUI拡張機能を追加してご利用ください。)
 
