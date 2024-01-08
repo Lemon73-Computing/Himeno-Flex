@@ -1,7 +1,7 @@
-# Himeno_Flex
+# Himeno Flex
 
 ## 概要
-こちらのソフトウェアは、[理化学研究所](https://www.riken.jp)/[情報システム部](https://i.riken.jp)
+こちらのソフトウェアは、[理化学研究所](https://www.riken.jp) - [情報システム部](https://i.riken.jp)
 より発表されている[姫野ベンチマーク](https://i.riken.jp/supercom/documents/himenobmt/)をGUIにしたソフトウェアです。<br />
 併せて[解説ページ](https://lemon73.gitlab.io/apps/himeno)もご覧ください。
 
@@ -29,14 +29,15 @@
   - .xaml
 
 ## ライセンス
+Himeno Flex & Himeno BMT xps
 - [LGPLv2.1](LICENSE.txt)
 
 ## 従来の姫野ベンチマークとの比較
 | 項目 | 従来 | Himeno Flex |
 | ---- | ---- | ----------- |
-| UI | CUI | **GUI** |
+| UI   | CUI  | **GUI**     |
 | ダウンロード | `.zip`展開 - `.lzh`展開 - `.c`のビルド - 起動 | **`.exe`起動** |
-| OS | **デスクトップ向け** | デスクトップ&モバイル(予定)(※) |
+| OS   | **デスクトップ向け** | デスクトップ&モバイル(予定)(※) |
 
 ※当初の予定ではWindows/MacOS/Android/iOSに対応予定でしたが、Androidは技術不足で開発困難、MacOS/iOSは実機テストが不可能なために開発を断念しました。
 <details>
